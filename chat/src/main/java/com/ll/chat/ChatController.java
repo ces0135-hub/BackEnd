@@ -1,5 +1,6 @@
 package com.ll.chat;
 
+import com.ll.chat.dto.MessageRequest;
 import com.ll.chat.dto.MessageResponse;
 import com.ll.chat.dto.WriteMessageRequest;
 import com.ll.chat.dto.WriteMessageResponse;
@@ -37,10 +38,28 @@ public class ChatController {
     @GetMapping("/messages")
     @ResponseBody
     // public RsData< List<ChatMessage> > getMessages() => 가독성 높이려고 dto로 따로 정의
-    public RsData<MessageResponse> getMessages() {
+    public RsData<MessageResponse> getMessages(MessageRequest messageRequest) {
+        //fromId 출력해서 확인하기
+        // System.out.println(messageRequest);
+        List<ChatMessage> messages = chatMessages;
+        if (messageRequest.fromId() != null) {
+            int index = -1;
+            for (int i = 0; i < messages.size(); i++) {
+                if (messages.get(i).getId() == messageRequest.fromId()) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1) {
+                messages = messages.subList(index + 1, messages.size());
+            }
+        }
+
         // return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages));
         // size()로 메세지 수 세기
-        return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages, chatMessages.size()));
+        // return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages, chatMessages.size()));
+        return new RsData("200", "메세지 가져오기 성공", new MessageResponse(messages, chatMessages.size()));
     }
 
 
