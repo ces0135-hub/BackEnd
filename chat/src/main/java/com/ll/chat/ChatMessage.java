@@ -1,17 +1,18 @@
 package com.ll.chat;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
-@Getter
+@Getter // Get 함수 만드는 데 필요
+
+// 메세지의 형태 정의
 public class ChatMessage {
     private long id;
-    private LocalDateTime createDate;
     private String authorName;
     private String content;
-    public ChatMessage(String authorName, String content) {
-        this(1, LocalDateTime.now(), authorName, content);
-    }
+    private LocalDateTime createDate;
 }

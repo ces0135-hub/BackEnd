@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-
-public class RsData<T> {
+// Result Data 의미
+public class RsData {
     private String resultCode;
     private String msg;
-    private T data;
+    private Object data;
 }
