@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 // Result Data 의미
-public class RsData {
+public class RsData<T> {
     private String resultCode;
     private String msg;
-    private Object data;
+    private T data;
 }
