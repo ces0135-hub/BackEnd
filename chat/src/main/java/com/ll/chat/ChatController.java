@@ -29,18 +29,21 @@ public class ChatController {
 
         chatMessages.add(cm);
 
-        return new RsData("200", "메세지가 작성되었습니다.", new WriteMessageResponse(chatMessages));
+        // return new RsData("200", "메세지가 작성되었습니다.", new WriteMessageResponse(chatMessages));
+        // 메세지 단건만 출력되도록 변경
+        return new RsData("200", "메세지가 작성되었습니다.", new WriteMessageResponse(cm));
     }
 
     @GetMapping("/messages")
     @ResponseBody
     // public RsData< List<ChatMessage> > getMessages() => 가독성 높이려고 dto로 따로 정의
     public RsData<MessageResponse> getMessages() {
-
-
-
-        return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages));
+        // return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages));
+        // size()로 메세지 수 세기
+        return new RsData("200", "메세지 가져오기 성공", new MessageResponse(chatMessages, chatMessages.size()));
     }
+
+
 	/*
 	@GetMapping("chat/writeMessage")
 	@ResponseBody
