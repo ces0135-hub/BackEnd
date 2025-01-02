@@ -22,6 +22,7 @@ import static lombok.AccessLevel.PROTECTED;
 @EntityListeners(AuditingEntityListener.class) // JPA Auditing 기능 사용
 @ToString // toString 메서드 자동 생성
 @EqualsAndHashCode // equals와 hashCode 메서드 자동 생성
+// 기본 타입 정의
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
