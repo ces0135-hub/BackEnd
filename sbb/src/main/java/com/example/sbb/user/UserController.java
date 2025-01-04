@@ -21,6 +21,7 @@ public class UserController {
         return "signup_form";
     }
 
+    // 회원가입 기능
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -51,6 +52,11 @@ public class UserController {
         }
 
         return "redirect:/question/list";
+    }
 
+    // 로그인 기능
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
     }
 }
