@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class QuestionService {
     // Pageable 객체를 생성할 때 사용한 PageRequest.of(page, 10)에서 page는 조회할 페이지의 번호이고,xs 10은 한 페이지에 보여 줄 게시물의 개수를 의미한다.
     // 이렇게 하면 데이터 전체를 조회하지 않고 해당 페이지의 데이터만 조회하도록 쿼리가 변경된다.
     public Page<Question> getList(int page) {
+        // 등록한 순서대로 표시
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10);
         return this.questionRepository.findAll(pageable);
     }
