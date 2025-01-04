@@ -4,9 +4,7 @@ package com.example.sbb.answer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.sbb.question.Question;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -17,7 +15,7 @@ public class AnswerService {
         Answer answer = new Answer();
         answer.setContent(content);
         answer.setQuestion(question);
-        answer.setCreateDate(LocalDate.from(LocalDateTime.now()));
+        answer.setCreateDate(LocalDate.now());
 
         this.answerRepository.save(answer);
     }
