@@ -1,21 +1,23 @@
 package com.example.sbb.answer;
 
 
+import com.example.sbb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.example.sbb.question.Question;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
-    public void create(Question question, String content) {
+    public void create(Question question, String content, SiteUser author) {
         Answer answer = new Answer();
         answer.setContent(content);
         answer.setQuestion(question);
-        answer.setCreateDate(LocalDate.now());
+        answer.setCreateDate(LocalDateTime.now());
+        answer.setAuthor(author);
 
         this.answerRepository.save(answer);
     }
