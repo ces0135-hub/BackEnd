@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="18b60237-6023-4f7e-b7b0-55f35a5ef955" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/DataNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/JumpToSpringBootApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/answer/Answer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/answer/AnswerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/answer/AnswerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/answer/AnswerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/question/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/question/QuestionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/question/QuestionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/java/com/example/JumpToSpringBoot/question/QuestionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/resources/templates/question_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/main/resources/templates/question_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JumpToSpringBoot/src/test/java/com/example/JumpToSpringBoot/JumpToSpringBootApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../chat/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/src/main/java/com/ll/chat2412/Chat2412Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat2412/src/test/java/com/ll/chat2412/Chat2412ApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Exception" />
+        <option value="HTML File" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2r6Co6UDBT20EtbdCUQPPjdYk3r" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Gradle.PracApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.prac 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.PracApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/baeksunghyun/Desktop/LikeLion/prac/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="PracApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="prac.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.prac.PracApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="18b60237-6023-4f7e-b7b0-55f35a5ef955" name="변경" comment="" />
+      <created>1735870309142</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735870309142</updated>
+      <workItem from="1735870310200" duration="6707000" />
+      <workItem from="1735885242804" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
