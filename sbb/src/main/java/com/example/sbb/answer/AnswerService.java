@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
-
+    /*
     public void create(Question question, String content, SiteUser author) {
         Answer answer = new Answer();
         answer.setContent(content);
@@ -22,6 +22,19 @@ public class AnswerService {
         answer.setAuthor(author);
 
         this.answerRepository.save(answer);
+    }
+    */
+    // 앵커를 활용하기 위해서 수정
+    // 답변 컨트롤러에서 답변이 등록된 위치로 이동하려면 반드시 답변 객체, 즉 Answer 객체가 필요하다.
+    // 위의 AnswerService에서는 답변 등록 시 답변 객체를 리턴하지 않으므로 다음과 같이 AnswerService를 수정
+    public Answer create(Question question, String content, SiteUser author) {
+        Answer answer = new Answer();
+        answer.setContent(content);
+        answer.setCreateDate(LocalDateTime.now());
+        answer.setQuestion(question);
+        answer.setAuthor(author);
+        this.answerRepository.save(answer);
+        return answer;
     }
 
     // 답변 조희
