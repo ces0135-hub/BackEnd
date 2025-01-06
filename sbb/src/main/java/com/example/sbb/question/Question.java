@@ -27,4 +27,7 @@ public class Question {
     // 작성자
     @ManyToOne
     private SiteUser author;
+
+    // 수정일
+    private LocalDateTime modifyDate;
 }
