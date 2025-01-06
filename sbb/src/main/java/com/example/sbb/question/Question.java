@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,4 +31,8 @@ public class Question {
 
     // 수정일
     private LocalDateTime modifyDate;
+
+    // 추천 관리를 위한 "집합" => 사용자(SiteUser)를 저장
+    @ManyToMany
+    Set<SiteUser> voter;
 }
