@@ -1,9 +1,16 @@
 package com.ll.mulitChat.domain.chat.ChatRoom.controller;
 
+import com.ll.mulitChat.domain.chat.ChatRoom.entity.ChatRoom;
 import com.ll.mulitChat.domain.chat.ChatRoom.service.ChatRoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -30,8 +37,13 @@ public class ChatRoomController {
     }
 
     @GetMapping("/list")
-    public String roomList() {
-        // Thymeleaf로 html 파일을 불러옴
+    public String roomList(Model model) {
+        // list.html에 던져 줄  데이터 => Model 객체를 사용해야 함(뷰에 객체를 넣어줄 때 사용)
+        List<ChatRoom> chatRooms = chatRoomService.getList();
+        model.addAttribute("chatRooms", chatRooms); // key:value 꼴
+
+        // Thymeleaf로 html 파일을 불러옴 => Model을 통해서 List인 chatRooms가 아래에 전달됨
+        // 이제 list.html에서 Thymeleaf 문법으로 출력하면 됨
         return "domain/chat/chatRoom/list";
     }
 }

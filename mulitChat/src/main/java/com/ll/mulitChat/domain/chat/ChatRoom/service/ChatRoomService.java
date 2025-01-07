@@ -5,6 +5,8 @@ import com.ll.mulitChat.domain.chat.ChatRoom.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ChatRoomService {
@@ -16,10 +18,14 @@ public class ChatRoomService {
                 .name(name)
                 .build();
 
-        // 객체 넣기 
+        // 객체 넣기
         chatRoomRepository.save(chatRoom);
 
         return chatRoom;
+    }
+
+    public List<ChatRoom> getList() {
+        return chatRoomRepository.findAll();
     }
 
 }

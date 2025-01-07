@@ -5,22 +5,10 @@
 </nav>
 
 <ul>
-    <li>
-        <a href="#">
-            <span>1번</span>
-            <span>공지방</span>
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            <span>2번</span>
-            <span>공부방</span>
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            <span>3번</span>
-            <span>잡담방</span>
+    <li th:each="chatRoom : ${chatRooms}">
+        <a th:href="${chatRoom.id}"> <!-- 클릭한 charRoom의 id로 url mapping -->
+            <span th:text="${chatRoom.id}"></span>
+            <span th:text="${chatRoom.name}"></span>
         </a>
     </li>
 </ul>
