@@ -19,7 +19,7 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor(access = PROTECTED) // 모든 필드 값을 파라미터로 받는 생성자 생성
 @Getter // 모든 필드의 getter 메서드 생성
 @SuperBuilder // 상속된 클래스에서 빌더 패턴 사용 가능
-// data 관련해서 자동으로 생성해주는 애들 
+// data 관련해서 자동으로 생성해주는 애들(생성일, 수정일 자동 생성)
 @EntityListeners(AuditingEntityListener.class) // JPA Auditing 기능 사용
 @ToString // toString 메서드 자동 생성
 @EqualsAndHashCode // equals와 hashCode 메서드 자동 생성
