@@ -5,10 +5,7 @@ import com.ll.mulitChat.domain.chat.ChatRoom.service.ChatRoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,9 +28,16 @@ public class ChatRoomController {
     }
 
     @GetMapping("/make")
-    public String makeRoom() {
+    public String showMakeRoom() {
         // Thymeleaf로 html 파일을 불러옴
         return "domain/chat/chatRoom/make";
+    }
+
+    // 채팅방 생성
+    @PostMapping("/make")
+    public String makeRoom(String name) {
+        chatRoomService.make(name);
+        return "redirect:/chat/room/list";
     }
 
     @GetMapping("/list")
