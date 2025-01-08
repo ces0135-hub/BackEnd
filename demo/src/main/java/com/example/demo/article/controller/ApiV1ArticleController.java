@@ -40,13 +40,19 @@ public class ApiV1ArticleController {
         return articleDTO;
     }
 
+    // Postman 이용시 key:value 값 입력해줘야함
     @PostMapping("")
-    public String create() {
-        return "작성";
+    public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
+        System.out.println(subject);
+        System.out.println(content);
+        return "등록 완료";
     }
 
     @PatchMapping("/{id}")
-    public String modify(@PathVariable("id") Long id) {
+    public String modify(@PathVariable("id") Long id, @RequestParam("subject") String subject, @RequestParam("content") String content) {
+        System.out.println(id);
+        System.out.println(subject);
+        System.out.println(content);
         return "수정";
     }
 
@@ -54,5 +60,4 @@ public class ApiV1ArticleController {
     public String delete(@PathVariable("id") Long id) {
         return "삭제";
     }
-
 }
