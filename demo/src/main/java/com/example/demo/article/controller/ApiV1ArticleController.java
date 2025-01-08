@@ -2,13 +2,13 @@ package com.example.demo.article.controller;
 
 import com.example.demo.article.dto.ArticleDTO;
 import com.example.demo.article.entity.Article;
+import com.example.demo.article.request.ArticleCreateRequest;
+import com.example.demo.article.request.ArticleModifyRequest;
+import com.example.demo.article.response.ArticleResponse;
+import com.example.demo.article.response.ArticlesResponse;
 import com.example.demo.article.service.ArticleService;
 import com.example.demo.global.rsData.RsData;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +20,6 @@ import java.util.List;
 @RequestMapping("/api/v1/articles")
 public class ApiV1ArticleController {
     private final ArticleService articleService;
-
-    @AllArgsConstructor
-    @Getter
-    // RsData<List<ArticlDTO>>를 보기 편하게 하려고 생성
-    public static class ArticlesResponse {
-        private final List<ArticleDTO> articleList;  // 조회시 표시될 이름
-    }
 
     // 다건 조회
     @GetMapping("")
@@ -47,12 +40,6 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 다건 조회 성공", new ArticlesResponse(articleList));
     }
 
-    @Getter
-    @AllArgsConstructor
-    public static class ArticleResponse {
-        private final ArticleDTO article;
-    }
-
     // 단건 조회
     @GetMapping("/{id}")
     public RsData<ArticleResponse> article(@PathVariable("id") Long id) {
@@ -62,33 +49,23 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
-
-
-    // 응답 폼 생성하기
-    @Data  // 이 안에 기본적인 Lombok 기능들이 다 포함됨
-    public static class ArticleRequest {
-        @NotBlank
-        private String subject;
-        @NotBlank
-        private String content;
-    }
-
     // Postman 이용시 key:value 값 입력해줘야함
     @PostMapping("")
-//    public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
-    // 위에 선언한 form을 이용해서 입력받기
-    public String create(@Valid @RequestBody ArticleRequest articleRequest) {
+    // public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
+    // request에 선언한 form을 이용해서 입력받기
+    public String create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest) {
         // JSON 형태로 입력 받음(Postman에서)
-        System.out.println(articleRequest.getSubject());
-        System.out.println(articleRequest.getContent());
+        System.out.println(articleCreateRequest.getSubject());
+        System.out.println(articleCreateRequest.getContent());
         return "등록 완료";
     }
 
+    // request에 선언한 form을 이용해서 입력받기
     @PatchMapping("/{id}")
-    public String modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleRequest articleRequest) {
+    public String modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleModifyRequest articleModifyRequest) {
         System.out.println(id);
-        System.out.println(articleRequest.getSubject());
-        System.out.println(articleRequest.getContent());
+        System.out.println(articleModifyRequest.getSubject());
+        System.out.println(articleModifyRequest.getContent());
         return "수정";
     }
 
