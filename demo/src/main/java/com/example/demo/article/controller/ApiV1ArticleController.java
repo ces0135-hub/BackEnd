@@ -10,21 +10,28 @@ import com.example.demo.article.response.ArticleResponse;
 import com.example.demo.article.response.ArticlesResponse;
 import com.example.demo.article.service.ArticleService;
 import com.example.demo.global.rsData.RsData;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
+
+// produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE
+// import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 
 @RestController  // return에 Thymeleaf가 오지 않기 때문에, 무조건 문자열로 데이터를 보냄
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/articles")
+// 스웨거 위해 produces, consumes 표기 => GetMapping에 2개 이상의 값이 들어가면 value를 명시해줘야 함
+@RequestMapping(value = "/api/v1/articles")
+@Tag(name = "ApiV1ArticleController", description = "게시글 CRUD API")  // 스웨거
 public class ApiV1ArticleController {
     private final ArticleService articleService;
 
     // 다건 조회
     @GetMapping("")
+    @Operation(summary = "게시글 다건 조희")  // 스웨거
     public RsData<ArticlesResponse> list() {
         List<ArticleDTO> articleList = this.articleService.getList();
         // RsData 형태 적용시키기
@@ -42,7 +49,8 @@ public class ApiV1ArticleController {
     }
 
     // 단건 조회 => data의 dto를 보여줌
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
+    @Operation(summary = "게시글 단건 조희")  // 스웨거
     public RsData<ArticleResponse> article(@PathVariable("id") Long id) {
         Article article = this.articleService.getArticle(id);
         ArticleDTO articleDTO = new ArticleDTO(article);
@@ -56,7 +64,8 @@ public class ApiV1ArticleController {
     }
 
     // Postman 이용시 key:value 값 입력해줘야함
-    @PostMapping("")
+    @PostMapping("")// consumes = ALL_VALUE: JSON 말고도 전체 데이터 형태로 통신 가능
+    @Operation(summary = "게시글 등록")   // 스웨거
     // public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
     // request에 선언한 form을 이용해서 입력받기
     public RsData<ArticleCreateResponse> create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest) {
@@ -72,6 +81,7 @@ public class ApiV1ArticleController {
 
     // request에 선언한 form을 이용해서 입력받기
     @PatchMapping("/{id}")
+    @Operation(summary = "게시글 수정")  // 스웨거
     public RsData<ArticleModifyResponse> modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleModifyRequest articleModifyRequest) {
         // System.out.println(id);
         // System.out.println(articleModifyRequest.getSubject());
@@ -89,6 +99,7 @@ public class ApiV1ArticleController {
     }
 
     @DeleteMapping("{id}")
+    @Operation(summary = "게시글 삭제")  // 스웨거
     public RsData<ArticleResponse> delete(@PathVariable("id") Long id) {
         Article article = this.articleService.getArticle(id);  // 삭제할 id
 
