@@ -20,7 +20,8 @@
 #    com.ll.rest_api: DEBUG
 #    org.hibernate.orm.jdbc.bind: TRACE
 #    org.hibernate.orm.jdbc.extract: TRACE
-
+server:
+  port: 8080
 spring:
   datasource:
     driver-class-name: org.h2.Driver
