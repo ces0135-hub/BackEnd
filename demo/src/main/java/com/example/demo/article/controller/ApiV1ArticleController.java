@@ -4,7 +4,10 @@ import com.example.demo.article.dto.ArticleDTO;
 import com.example.demo.article.entity.Article;
 import com.example.demo.article.service.ArticleService;
 import com.example.demo.global.rsData.RsData;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -59,24 +62,39 @@ public class ApiV1ArticleController {
         return RsData.of("200", "게시글 단건 조회 성공", new ArticleResponse(articleDTO));
     }
 
+
+
+    // 응답 폼 생성하기
+    @Data  // 이 안에 기본적인 Lombok 기능들이 다 포함됨
+    public static class ArticleRequest {
+        @NotBlank
+        private String subject;
+        @NotBlank
+        private String content;
+    }
+
     // Postman 이용시 key:value 값 입력해줘야함
     @PostMapping("")
-    public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
-        System.out.println(subject);
-        System.out.println(content);
+//    public String create(@RequestParam("subject") String subject, @RequestParam("content") String content) {
+    // 위에 선언한 form을 이용해서 입력받기
+    public String create(@Valid @RequestBody ArticleRequest articleRequest) {
+        // JSON 형태로 입력 받음(Postman에서)
+        System.out.println(articleRequest.getSubject());
+        System.out.println(articleRequest.getContent());
         return "등록 완료";
     }
 
     @PatchMapping("/{id}")
-    public String modify(@PathVariable("id") Long id, @RequestParam("subject") String subject, @RequestParam("content") String content) {
+    public String modify(@PathVariable("id") Long id, @Valid @RequestBody ArticleRequest articleRequest) {
         System.out.println(id);
-        System.out.println(subject);
-        System.out.println(content);
+        System.out.println(articleRequest.getSubject());
+        System.out.println(articleRequest.getContent());
         return "수정";
     }
 
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") Long id) {
+        System.out.println(id);
         return "삭제";
     }
 }
