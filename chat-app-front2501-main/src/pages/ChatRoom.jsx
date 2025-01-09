@@ -18,15 +18,14 @@ function ChatRoom() {
     // 초기 메시지 로드
     const fetchInitialMessages = async () => {
         try {
-            const response = await axios.get(`http://localhost:8070/api/v1/chat/rooms/${roomId}/messages`)
-            if (response.data && response.data.length > 0) {
-                setMessages(response.data)
+            const response = await axios.get(`http://localhost:8070/api/v1/chat/rooms/${roomId}`)
+            if (response.data) {
+                setMessages(mockChats)
             }
         } catch (error) {
             console.error('Error fetching initial messages:', error)
             setMessages(mockChats)
             toast.warning('테스트 데이터를 표시합니다.')
-            // toast.error('채팅 연결에 문제가 발생했습니다.')
         } finally {
             setLoading(false)
         }

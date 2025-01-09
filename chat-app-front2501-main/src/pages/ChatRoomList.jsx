@@ -19,7 +19,7 @@ function ChatRoomList() {
             console.error('Error fetching chat rooms:', error)
             setChatRooms(mockChatRooms)
             toast.warning('테스트 데이터를 표시합니다.')
-            // toast.error('채팅방 목록을 불러오는데 실패했습니다.')
+            toast.error('채팅방 목록을 불러오는데 실패했습니다.')
         } finally {
             setLoading(false)
         }
@@ -40,7 +40,7 @@ function ChatRoomList() {
             })
             setNewRoomName('')
             toast.success('채팅방이 생성되었습니다.')
-            fetchChatRooms() // 목록 새로고침
+            fetchChatRooms()
         } catch (error) {
             toast.error('채팅방 생성에 실패했습니다.')
             console.error('Error creating chat room:', error)
