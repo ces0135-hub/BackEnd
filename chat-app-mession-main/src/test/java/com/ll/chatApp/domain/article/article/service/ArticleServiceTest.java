@@ -44,6 +44,7 @@ public class ArticleServiceTest {
         assertThat(author.getUsername()).isEqualTo("user1");
     }
 
+    // 게시글 수정
     @DisplayName("1번 글의 제목을 수정한다.")
     @Test
     void t4() {
