@@ -41,4 +41,8 @@ public class Article extends BaseEntity {
 
         comments.add(articleComment);   // list는 추가할 때 add 사용
     }
+
+    public void removeComment(ArticleComment articleComment) {
+        comments.remove(articleComment);
+    }
 }
