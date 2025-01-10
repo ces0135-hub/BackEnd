@@ -1,6 +1,7 @@
 package com.ll.chatApp.domain.article.article.service;
 
 import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
+import com.ll.chatApp.domain.article.article.articleComment.service.ArticleCommentService;
 import com.ll.chatApp.domain.article.article.articleTag.entity.ArticleTag;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.member.member.entity.Member;
@@ -22,11 +23,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ActiveProfiles("test")
 @Transactional
 public class ArticleServiceTest {
-    @Autowired
+    @Autowired  // 테스트용으로 객체 만들기
     private ArticleService articleService;
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private ArticleCommentService articleCommentService;
 
     @DisplayName("글 쓰기")
     @Test
@@ -125,19 +129,19 @@ public class ArticleServiceTest {
         System.out.println(article1);
     }
 
-//    @DisplayName("1번 회원이 작성한 댓글들")
-//    @Test
-//    void t11() {
-//        List<ArticleComment> articleComments = articleCommentService.findByAuthorId(1L);
-//        assertThat(articleComments.size()).isGreaterThan(0);
-//    }
-//
-//    @DisplayName("1번 회원이 작성한 태그들")
-//    @Test
-//    void t12() {
-//        List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
-//        assertThat(articleTags.size()).isGreaterThan(0);
-//    }
+    @DisplayName("1번 회원이 작성한 댓글들")
+    @Test
+    void t11() {
+        List<ArticleComment> articleComments = articleCommentService.findByAuthorId(1L);
+        assertThat(articleComments.size()).isGreaterThan(0);
+    }
+
+    @DisplayName("1번 회원이 작성한 태그들")
+    @Test
+    void t12() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
+        assertThat(articleTags.size()).isGreaterThan(0);
+    }
 //
 //    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
 //    @Test
