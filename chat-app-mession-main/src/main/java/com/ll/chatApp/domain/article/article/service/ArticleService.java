@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,5 +53,9 @@ public class ArticleService {
     @Transactional  //.save()가 필요없음
     public void modifyComment(ArticleComment comment, String commentBody) {
         comment.setBody(commentBody);
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
     }
 }
