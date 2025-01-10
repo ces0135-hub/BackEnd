@@ -36,6 +36,7 @@ public class Article extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = ALL, orphanRemoval = true)
     // orphanRemoval = true: 자식 요소를 추적해서 삭제해줌
     @Builder.Default  // 안 붙여주면 comments가 null 값으로 초기화됨
+    @ToString.Exclude  // 무한 참조 문제 해결
     private List<ArticleComment> comments = new ArrayList<>();
 
     public void addComment(Member memberAuthor, String commentBody) {
@@ -56,6 +57,7 @@ public class Article extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = ALL, orphanRemoval = true)
     @Builder.Default
+    @ToString.Exclude
     private List<ArticleTag> tags = new ArrayList<>();
 
     // 단건 추가

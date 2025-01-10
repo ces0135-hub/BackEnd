@@ -115,6 +115,9 @@ public class ArticleServiceTest {
         assertThat(tagsStr).isEqualTo("#자바 #백엔드");
     }
 
+
+    // 무한 순환 참조 문제 => @OneToMany에 @ToString.Exclude를 통해 해결
+    // ArticleTag 안에 Article article 존재 => 그 안에 또 ArticleTag 존재
     @DisplayName("1번 게시물 toString")
     @Test
     void t10() {

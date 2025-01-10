@@ -21,5 +21,4 @@ public class ArticleTag extends BaseEntity {
     private Article article;
 
     private String content;
-
 }
