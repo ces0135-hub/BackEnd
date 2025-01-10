@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static jakarta.persistence.CascadeType.ALL;
 
@@ -73,5 +74,20 @@ public class Article extends BaseEntity {
         for (String tagContent : tagContents) {
             addTag(tagContent);
         }
+    }
+
+    public String getTagsStr() {
+        String tagStr = tags
+                .stream()
+                .map(ArticleTag::getContent)  // 안에 있는 content를 순환하며 호출
+                .collect(Collectors.joining(" #"));
+
+        // 빈 문자열 처리
+        if(tagStr.isBlank()) {
+            return"";
+        }
+
+        // 형식: 뒤에 "#"을 붙임 => 자바 #백엔드 #스프링
+        return "#" + tagStr;  // 맨 앞의 "#"는 붙여줘야 함
     }
 }
