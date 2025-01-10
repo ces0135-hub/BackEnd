@@ -3,6 +3,7 @@ package com.ll.chatApp.domain.article.article.service;
 import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
 import com.ll.chatApp.domain.article.article.articleComment.service.ArticleCommentService;
 import com.ll.chatApp.domain.article.article.articleTag.entity.ArticleTag;
+import com.ll.chatApp.domain.article.article.articleTag.service.ArticleTagService;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.domain.member.member.service.MemberService;
@@ -32,6 +33,9 @@ public class ArticleServiceTest {
     @Autowired
     private ArticleCommentService articleCommentService;
 
+    @Autowired
+    private ArticleTagService articleTagService;
+
     @DisplayName("글 쓰기")
     @Test
     void t1() {
@@ -54,7 +58,7 @@ public class ArticleServiceTest {
         Article article = articleService.findById(1L).get();
         Member author = article.getAuthor();  // Article의 author를 Getter로 가져옴
 
-        assertThat(author.getAuthor()).isEqualTo("user1");
+        assertThat(author.getUsername()).isEqualTo("user1");
     }
 
     // 게시글 수정
@@ -142,11 +146,11 @@ public class ArticleServiceTest {
         List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
         assertThat(articleTags.size()).isGreaterThan(0);
     }
-//
-//    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
-//    @Test
-//    void t13() {
-//        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
-//        assertThat(articleTags.size()).isGreaterThan(0);
-//    }
+
+    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
+    @Test
+    void t13() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
+        assertThat(articleTags.size()).isGreaterThan(0);
+    }
 }
