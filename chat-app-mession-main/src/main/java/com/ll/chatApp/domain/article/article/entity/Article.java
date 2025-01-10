@@ -1,6 +1,7 @@
 package com.ll.chatApp.domain.article.article.entity;
 
 import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
+import com.ll.chatApp.domain.article.article.articleTag.entity.ArticleTag;
 import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class Article extends BaseEntity {
     private String title;
     private String content;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
 
@@ -34,7 +36,6 @@ public class Article extends BaseEntity {
     // orphanRemoval = true: 자식 요소를 추적해서 삭제해줌
     @Builder.Default  // 안 붙여주면 comments가 null 값으로 초기화됨
     private List<ArticleComment> comments = new ArrayList<>();
-
 
     public void addComment(Member memberAuthor, String commentBody) {
         ArticleComment articleComment = ArticleComment.builder()
@@ -46,7 +47,31 @@ public class Article extends BaseEntity {
         comments.add(articleComment);   // list는 추가할 때 add 사용
     }
 
+
     public void removeComment(ArticleComment articleComment) {
         comments.remove(articleComment);
+    }
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ArticleTag> tags = new ArrayList<>();
+
+    // 단건 추가
+    public void addTag(String tagContent) {
+        ArticleTag tag = ArticleTag.builder()
+                .article(this)
+                .content(tagContent)
+                .build();
+
+        tags.add(tag);
+    }
+
+    // 다건 추가
+    // 가변 파라미터 받기 => 반복문 이용
+    public void addTags(String... tagContents) {
+        for (String tagContent : tagContents) {
+            addTag(tagContent);
+        }
     }
 }

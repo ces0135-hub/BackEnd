@@ -65,11 +65,14 @@ public class NotProd {
                 article3.addComment(member1, "댓글11");
                 article3.addComment(member1, "댓글12");
 
-                // 람다식을 사용하지 않게 변경 => 필요없어짐
-                // Transactional이 없어서 더티 채킹이 안 되므로 save() 해줘야 함
-                // articleRepository.save(article1);
-                // articleRepository.save(article2);
-                // articleRepository.save(article3);
+//                article1.addTag("자바");
+//                article1.addTag("스프링");
+//                article2.addTag("데이터베이스");
+//                article2.addTag("JPA");
+                article1.addTag("자바");
+                article1.addTag("백엔드");
+                article2.addTags("프레임워크", "스프링부트");
+                article2.addTags("자바", "스프링부트");
             }
         };
     }
@@ -111,6 +114,8 @@ return args -> {
             article3.addComment(member1, "댓글11");
             article3.addComment(member1, "댓글12");
 
+            // 람다식을 사용하지 않게 변경 => 필요없어짐
+            // Transactional이 없어서 더티 채킹이 안 되므로 save() 해줘야 함
             articleRepository.save(article1);
             articleRepository.save(article2);
             articleRepository.save(article3);
