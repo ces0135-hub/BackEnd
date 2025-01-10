@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class ChatMessageService {
     private final ChatMessageRepository chatMessageRepository;
 
+    // 빌더 형태로 정보 삽입
     public void create(ChatRoom chatRoom, String writerName, String content) {
         ChatMessage chatMessage = ChatMessage.builder()
                 .chatRoom(chatRoom)

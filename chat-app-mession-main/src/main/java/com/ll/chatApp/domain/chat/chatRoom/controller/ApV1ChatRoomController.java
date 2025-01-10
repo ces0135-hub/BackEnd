@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/chat/rooms")
-@CrossOrigin(origins = "https://cdpn.io")
+@CrossOrigin(origins = "http://localhost:5173")  // 현재 프론트엔드 주소로 변경
 public class ApV1ChatRoomController {
     private final ChatRoomService chatRoomService;
 
