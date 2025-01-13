@@ -7,6 +7,8 @@ import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.global.rsData.RsData;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +59,16 @@ public class ArticleService {
 
     public List<Article> findAll() {
         return articleRepository.findAll();
+    }
+
+    public Page<Article> search(List<String> kwTypes, String kw, Pageable pageable) {
+        if (kwTypes.contains("title") && kwTypes.contains("content")) {
+            return articleRepository.findByTitleContainingOrContentContaining(kw, kw, pageable);
+        } else if (kwTypes.contains("title")) {
+            return articleRepository.findByTitleContaining(kw, pageable);
+        } else if (kwTypes.contains("content")) {
+            return articleRepository.findByContentContaining(kw, pageable);
+        }
+        return articleRepository.findAll(pageable);
     }
 }
