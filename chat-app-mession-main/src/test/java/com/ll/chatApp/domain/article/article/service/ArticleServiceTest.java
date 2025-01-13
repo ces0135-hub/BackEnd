@@ -1,14 +1,22 @@
 package com.ll.chatApp.domain.article.article.service;
 
+import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
+import com.ll.chatApp.domain.article.article.articleComment.service.ArticleCommentService;
+import com.ll.chatApp.domain.article.article.articleTag.entity.ArticleTag;
+import com.ll.chatApp.domain.article.article.articleTag.service.ArticleTagService;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.member.member.entity.Member;
+import com.ll.chatApp.domain.member.member.service.MemberService;
 import com.ll.chatApp.global.rsData.RsData;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -16,8 +24,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ActiveProfiles("test")
 @Transactional
 public class ArticleServiceTest {
-    @Autowired
+    @Autowired  // 테스트용으로 객체 만들기
     private ArticleService articleService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private ArticleCommentService articleCommentService;
+
+    @Autowired
+    private ArticleTagService articleTagService;
 
     @DisplayName("글 쓰기")
     @Test
@@ -44,6 +61,7 @@ public class ArticleServiceTest {
         assertThat(author.getUsername()).isEqualTo("user1");
     }
 
+    // 게시글 수정
     @DisplayName("1번 글의 제목을 수정한다.")
     @Test
     void t4() {
@@ -54,5 +72,85 @@ public class ArticleServiceTest {
         Article article_ = articleService.findById(1L).get();
 
         assertThat(article_.getTitle()).isEqualTo("수정된 제목");
+    }
+
+    // 댓글 작성
+    @DisplayName("2번 글에 댓글들을 추가한다.")
+    @Test
+    @Rollback(false)
+    void t5() {
+        Member member1 = memberService.findById(1L).get();
+        Article article2 = articleService.findById(2L).get();
+
+        article2.addComment(member1, "댓글 입니다.");
+    }
+
+    @DisplayName("1번 글의 댓글들을 수정한다.")
+    @Test
+    void t6() {
+        Article article = articleService.findById(2L).get();
+
+        article.getComments().forEach(comment -> {
+            articleService.modifyComment(comment, comment.getBody() + "!!");
+        });
+    }
+
+    @DisplayName("1번 글의 댓글 중 마지막 것을 삭제한다.")
+    @Test
+    void t7() {
+        Article article = articleService.findById(2L).get();
+
+        ArticleComment lastComment = article.getComments().getLast();
+
+        article.removeComment(lastComment);
+    }
+
+    @DisplayName("게시물 별 댓글 수 출력")
+    @Test
+    void t8() {
+        List<Article> articles = articleService.findAll();
+        articles.forEach(article -> {
+            System.out.println("게시물 번호: " + article.getId());
+            System.out.println("댓글 수: " + article.getComments().size());
+        });
+    }
+
+    @DisplayName("1번 게시물의 태그(String)를 반환한다.")
+    @Test
+    void t9() {
+        Article article1 = articleService.findById(1L).get();
+        String tagsStr = article1.getTagsStr();
+        assertThat(tagsStr).isEqualTo("#자바 #백엔드");
+    }
+
+
+    // 무한 순환 참조 문제 => @OneToMany에 @ToString.Exclude를 통해 해결
+    // ArticleTag 안에 Article article 존재 => 그 안에 또 ArticleTag 존재
+    @DisplayName("1번 게시물 toString")
+    @Test
+    void t10() {
+        Article article1 = articleService.findById(1L).get();
+        System.out.println(article1);
+    }
+
+    @DisplayName("1번 회원이 작성한 댓글들")
+    @Test
+    void t11() {
+        List<ArticleComment> articleComments = articleCommentService.findByAuthorId(1L);
+        assertThat(articleComments.size()).isGreaterThan(0);
+    }
+
+    @DisplayName("1번 회원이 작성한 태그들")
+    @Test
+    void t12() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorId(1L);
+        assertThat(articleTags.size()).isGreaterThan(0);
+    }
+
+    @DisplayName("아이디가 user1 인 회원이 작성한 태그들")
+    @Test
+    void t13() {
+        List<ArticleTag> articleTags = articleTagService.findByAuthorUsername("user1");
+        assertThat(articleTags.size()).isGreaterThan(0);
     }
 }

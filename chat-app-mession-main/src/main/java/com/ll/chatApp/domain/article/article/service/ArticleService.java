@@ -1,5 +1,6 @@
 package com.ll.chatApp.domain.article.article.service;
 
+import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.article.article.repository.ArticleRepository;
 import com.ll.chatApp.domain.member.member.entity.Member;
@@ -8,6 +9,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +48,14 @@ public class ArticleService {
         article.setContent(content);
 
         articleRepository.save(article);
+    }
+
+    @Transactional  //.save()가 필요없음
+    public void modifyComment(ArticleComment comment, String commentBody) {
+        comment.setBody(commentBody);
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
     }
 }
