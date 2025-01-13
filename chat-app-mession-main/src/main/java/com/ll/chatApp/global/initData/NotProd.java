@@ -65,10 +65,6 @@ public class NotProd {
                 article3.addComment(member1, "댓글11");
                 article3.addComment(member1, "댓글12");
 
-//                article1.addTag("자바");
-//                article1.addTag("스프링");
-//                article2.addTag("데이터베이스");
-//                article2.addTag("JPA");
                 article1.addTag("자바");
                 article1.addTag("백엔드");
                 article2.addTags("프레임워크", "스프링부트");
