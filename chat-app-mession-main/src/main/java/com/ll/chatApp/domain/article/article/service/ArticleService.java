@@ -85,6 +85,7 @@ public class ArticleService {
 //        }
 
 
-        return articleRepository.findAll(pageable);
+        // 수정 : return articleRepository.findAll(pageable);
+        return articleRepository.search(kwTypes, kw, pageable);
     }
 }
