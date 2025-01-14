@@ -1,5 +1,6 @@
 package com.ll.chatApp.domain.article.article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
 import com.ll.chatApp.domain.article.article.articleTag.entity.ArticleTag;
 import com.ll.chatApp.domain.member.member.entity.Member;
@@ -32,6 +33,7 @@ public class Article extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member author;
 
+    @JsonIgnore
     // @OneToMany의 기본 설정
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = ALL, orphanRemoval = true)
     // orphanRemoval = true: 자식 요소를 추적해서 삭제해줌
@@ -55,6 +57,7 @@ public class Article extends BaseEntity {
     }
 
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = ALL, orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
