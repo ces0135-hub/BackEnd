@@ -1,6 +1,7 @@
 package com.ll.chatApp.domain.article.article.controller;
 
 import com.ll.chatApp.domain.article.article.dto.ArticleDto;
+import com.ll.chatApp.domain.article.article.dto.ArticleWriteRequest;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.article.article.service.ArticleService;
 import com.ll.chatApp.global.rsData.RsData;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/v1/articles")
@@ -43,19 +45,37 @@ public class ApiV1ArticleController {
 
     // 게시글 등록
     @PostMapping
-    public RsData<Article> writeArticle(@RequestBody Article article) {
-        return articleService.write(article.getId(), article.getTitle(), article.getContent());
+    public RsData writeArticle(@RequestBody ArticleWriteRequest articleWriteRequest) {
+        Article article = articleService.write(articleWriteRequest.getTitle(), articleWriteRequest.getContent());
+
+        return RsData.of(
+                "200",
+                "게시글 작성에 성공했습니다.",
+                new ArticleDto(article)
+        );
     }
 
     // 게시글 수정
     @PostMapping("{id}")
-    public void updateArticle(@PathVariable("id") Long id, @RequestBody Article article) {
-        this.articleService.modify(article, article.getTitle(), article.getContent());
+    public RsData<ArticleDto> updateArticle(@PathVariable("id") Long id, @RequestBody Article article) {
+        Article modifiedArticle = this.articleService.modify(article, article.getTitle(), article.getContent());
+
+        return RsData.of(
+                "200",
+                "게시글 수정에 성공하였습니다.",
+                new ArticleDto(modifiedArticle)
+        );
     }
 
     @DeleteMapping("{id}")
-    public void deleteArticle(@PathVariable("id") Long id) {
-        this.articleService.delete(id);
+    public RsData<Void> deleteArticle(@PathVariable("id") Long id) {
+        this.articleService.delete(id);  // delete 메서드는 void
+
+        return RsData.of(
+                "200",
+                "게시글 삭제에 성공했습니다.",
+                null  // 아무것도 반환하지 않으므로
+        );
     }
 
 }

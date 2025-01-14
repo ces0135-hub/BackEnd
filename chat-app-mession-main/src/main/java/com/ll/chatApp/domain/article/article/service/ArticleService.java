@@ -19,20 +19,14 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     @Transactional
-    public RsData<Article> write(Long authorId, String title, String content) {
+    public Article write(String title, String content) {
         Article article = Article.builder()
-                .author(
-                        Member.builder()
-                                .id(authorId)
-                                .build()
-                )  // 만들면서 memberId에 해당하는 Member 생성
+                .author(Member.builder().id(1L).build())
                 .title(title)
                 .content(content)
                 .build();
 
-        articleRepository.save(article);
-
-        return RsData.of("200", "글 작성 성공", article);
+        return articleRepository.save(article);
     }
 
     // ArticleServiceTest에서 .get()을 사용하기 때문에 Optional로 반환
@@ -43,11 +37,11 @@ public class ArticleService {
     }
 
     @Transactional
-    public void modify(Article article, String title, String content) {
+    public Article modify(Article article, String title, String content) {
         article.setTitle(title);
         article.setContent(content);
 
-        articleRepository.save(article);
+        return article;
     }
 
     @Transactional  //.save()가 필요없음

@@ -39,7 +39,7 @@ public class ArticleServiceTest {
     @DisplayName("글 쓰기")
     @Test
     void t1() {
-        RsData<Article> writeRs = articleService.write(1L,"제목", "내용");
+        RsData<Article> writeRs = articleService.write(1L, "제목", "내용"); // 1은 회원번호
         Article article = writeRs.getData();
 
         assertThat(article.getId()).isGreaterThan(0L);
