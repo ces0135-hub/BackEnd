@@ -20,7 +20,7 @@ public class ApiV1MemberController {
     public RsData<MemberDto> signup(@Valid @RequestBody MemberRequest memberRequest) {
         Member member = memberService.join(memberRequest.getUsername(), memberRequest.getPassword());
 
-        return RsData.of("200", "회원가입 성공", new MemberDto(member));
+        return new RsData<>("200", "회원가입 성공", new MemberDto(member));
     }
 
     @PostMapping("/login")
