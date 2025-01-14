@@ -6,6 +6,7 @@ import com.ll.chatApp.global.rsData.RsData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +18,17 @@ import java.util.Optional;
 @Getter
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;  // 비밀번호 인코딩
 
-    public RsData<Member> join(String username, String password) {
+    public Member join(String username, String password) {
         Member member = Member.builder()
                 .username(username)
-                .password(password)
+                .password(passwordEncoder.encode(password))  // 인코딩한 비밀번호
                 .build();
 
         memberRepository.save(member);
 
-        return RsData.of("200", "%s님 가입을 환영합니다.".formatted(username), member);
+        return member;
     }
 
     public Optional<Member> findById(Long id) {
