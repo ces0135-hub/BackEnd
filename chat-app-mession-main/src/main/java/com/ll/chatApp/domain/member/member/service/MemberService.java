@@ -21,6 +21,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;  // 비밀번호 인코딩
 
     public Member join(String username, String password) {
+        Member CheckedSignupMember = memberRepository.findByUsername(username);
+
+        if(CheckedSignupMember != null) {
+            throw new IllegalArgumentException("이미 가입된 회원입니다.");
+        }
+
         Member member = Member.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))  // 인코딩한 비밀번호

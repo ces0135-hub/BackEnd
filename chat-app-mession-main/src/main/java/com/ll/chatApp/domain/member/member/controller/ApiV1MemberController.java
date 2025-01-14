@@ -1,5 +1,6 @@
 package com.ll.chatApp.domain.member.member.controller;
 
+import com.ll.chatApp.domain.member.member.dto.MemberDto;
 import com.ll.chatApp.domain.member.member.dto.MemberRequest;
 import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.domain.member.member.service.MemberService;
@@ -16,10 +17,10 @@ public class ApiV1MemberController {
 
     // 회원가입
     @PostMapping("/signup")
-    public RsData<String> signup(@Valid @RequestBody MemberRequest memberRequest) {
+    public RsData<MemberDto> signup(@Valid @RequestBody MemberRequest memberRequest) {
         Member member = memberService.join(memberRequest.getUsername(), memberRequest.getPassword());
 
-        return RsData.of("200", "회원가입 성공", member.getUsername());
+        return RsData.of("200", "회원가입 성공", new MemberDto(member));
     }
 
     @PostMapping("/login")
