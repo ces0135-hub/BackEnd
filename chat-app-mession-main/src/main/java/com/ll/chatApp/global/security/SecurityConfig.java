@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-// 인증 처리
+// 인증 처리(권한 설정)
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

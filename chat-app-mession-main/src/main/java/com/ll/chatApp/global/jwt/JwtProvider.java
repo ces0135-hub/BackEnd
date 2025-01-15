@@ -19,6 +19,10 @@ public class JwtProvider {
     @Value("${custom.jwt.secretKey}")
     private String secretKeyOrigin;
 
+    @Value("${custom.accessToken.expirationSeconds}")
+    private int accessTokenExpirationSeconds;  // 유효 시간도 암호화
+
+
     private SecretKey cachedSecretKey;
 
     public SecretKey getSecretKey() {
@@ -35,13 +39,11 @@ public class JwtProvider {
     }
 
     public String genAccessToken(Member member) {
-        genToken(member, 60 * 10);  // 10분 동안 유효
-        return "";
+        return genToken(member, accessTokenExpirationSeconds);  // 10분 동안 유효
     }
 
     public String genRefreshToken(Member member) {
-        genToken(member, 60 * 60 * 24 * 365 * 1);  // 1년 동안 유효
-        return "";
+        return genToken(member, accessTokenExpirationSeconds);  // 1년 동안 유효
     }
 
     // Token 생 => 회원정보, 유효기간을 입력받음
