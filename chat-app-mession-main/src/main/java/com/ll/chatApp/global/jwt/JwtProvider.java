@@ -75,4 +75,21 @@ public class JwtProvider {
         // body의 JSON 타입을 map으로 바꿔줌
         return Ut.toMap(body);
     }
+
+    // 유효성(토큰) 검증
+    public boolean verify(String token) {
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(getSecretKey())
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void refresh(String refreshToken) {
+
+    }
 }
