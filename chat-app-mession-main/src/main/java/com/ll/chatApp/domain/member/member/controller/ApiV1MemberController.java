@@ -43,12 +43,19 @@ public class ApiV1MemberController {
         // response.addCookie(new Cookie("accessToken", token));
         // HttpOnly로 변경
         Cookie cookie = new Cookie("accessToken", token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 60);
-
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
+
+
+        String refreshToken = member.getRefreshToken();  // Member의 refreshToken 가져오기
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+            refreshTokenCookie.setHttpOnly(true);
+            refreshTokenCookie.setSecure(true);
+            refreshTokenCookie.setPath("/");
+        response.addCookie(refreshTokenCookie);
 
         return new RsData<>("200", "로그인 성공");
     }

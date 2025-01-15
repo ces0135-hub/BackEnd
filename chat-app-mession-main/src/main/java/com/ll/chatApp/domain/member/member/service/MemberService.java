@@ -26,6 +26,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;  // 비밀번호 인코딩
     private final JwtProvider jwtProvider;
 
+    // 회원가입
     public Member join(String username, String password) {
         Member CheckedSignupMember = memberRepository.findByUsername(username);
 
@@ -38,9 +39,11 @@ public class MemberService {
                 .password(passwordEncoder.encode(password))  // 인코딩한 비밀번호
                 .build();
 
-        memberRepository.save(member);
+        // 회원가입시 토큰 생성하고 넣기
+        String refreshToken = jwtProvider.genRefreshToken(member);
+        member.setRefreshToken(refreshToken);
 
-        return member;
+        return memberRepository.save(member);
     }
 
     public Optional<Member> findById(Long id) {
@@ -50,6 +53,7 @@ public class MemberService {
     public Member getMember(String username) {
         return memberRepository.findByUsername(username);
     }
+
 
     // 토큰 유효성 검증
     public boolean validateToken(String token) {

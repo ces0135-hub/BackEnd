@@ -37,7 +37,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             // 토큰 유효기간 검증
             if (!memberService.validateToken(accessToken)) {
                 String refreshToken = _getCookie("refreshToken");
-                RsData<String> rs = memberService.refreshAccessToken(refreshToken);
+                RsData<String> rs = memberService.refreshAccessToken (refreshToken);
                 _addHeaderCookie("accessToken", rs.getData());
             }
             // securityUser 가져오기
