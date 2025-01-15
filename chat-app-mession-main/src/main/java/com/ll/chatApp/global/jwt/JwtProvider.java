@@ -62,4 +62,17 @@ public class JwtProvider {
                 .signWith(getSecretKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
+
+    // 클레임 정보 받아오기
+    public Map<String, Object> getClaims(String token) {
+        // 토큰 복호화
+        String body = Jwts.parserBuilder()
+                .setSigningKey(getSecretKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("body", String.class);
+        // body의 JSON 타입을 map으로 바꿔줌
+        return Ut.toMap(body);
+    }
 }

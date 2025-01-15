@@ -8,10 +8,13 @@ import com.ll.chatApp.global.jwt.JwtProvider;
 import com.ll.chatApp.global.rsData.RsData;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/members")
@@ -49,7 +52,23 @@ public class ApiV1MemberController {
 
     // 내정보 불러오기
     @GetMapping("/me")
-    public void me() {
+    public RsData<MemberDto> me(HttpServletRequest request) {  // request 안에 Cookie가 담겨있음
+        Cookie[] cookies = request.getCookies();
 
+        String accessToken = "";
+
+        for(Cookie cookie:cookies) {
+            if(cookie.getName().equals("accessToken")) {
+                accessToken = cookie.getValue();
+            }
+        }
+
+        Map<String, Object> claims = jwtProvider.getClaims(accessToken);  // getClaims는 Map을 return하니까
+        String username = (String) claims.get("username");  // get("key값") 이용
+
+        // getMember(username)은 username으로 회원 정보를 불러오는 메서드
+        Member member = this.memberService.getMember(username);
+
+        return new RsData<>("200", "회원정보 조희 성공", new MemberDto(member));
     }
 }
