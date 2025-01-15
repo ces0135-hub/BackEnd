@@ -3,6 +3,7 @@ package com.ll.chatApp.domain.member.member.service;
 import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.domain.member.member.repository.MemberRepository;
 import com.ll.chatApp.global.rsData.RsData;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -39,5 +40,9 @@ public class MemberService {
 
     public Optional<Member> findById(Long id) {
         return memberRepository.findById(id);
+    }
+
+    public Member getMember(String username) {
+        return memberRepository.findByUsername(username);
     }
 }
