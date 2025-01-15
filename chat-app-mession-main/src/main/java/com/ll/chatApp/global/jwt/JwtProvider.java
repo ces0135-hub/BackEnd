@@ -46,7 +46,7 @@ public class JwtProvider {
         return genToken(member, accessTokenExpirationSeconds);  // 1년 동안 유효
     }
 
-    // Token 생 => 회원정보, 유효기간을 입력받음
+    // Token 생성 => 회원정보, 유효기간을 입력받음
     public String genToken(Member member, int seconds) {
         Map<String, Object> claims = new HashMap<>();  // hashMap 생성
 
