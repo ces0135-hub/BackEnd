@@ -1,13 +1,17 @@
 package com.ll.chatApp.domain.article.article.service;
 
+import com.ll.chatApp.domain.article.article.articleComment.entity.ArticleComment;
 import com.ll.chatApp.domain.article.article.entity.Article;
 import com.ll.chatApp.domain.article.article.repository.ArticleRepository;
 import com.ll.chatApp.domain.member.member.entity.Member;
 import com.ll.chatApp.global.rsData.RsData;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +50,39 @@ public class ArticleService {
         article.setContent(content);
 
         articleRepository.save(article);
+    }
+
+    @Transactional  //.save()가 필요없음
+    public void modifyComment(ArticleComment comment, String commentBody) {
+        comment.setBody(commentBody);
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
+    }
+
+    public Page<Article> search(List<String> kwTypes, String kw, Pageable pageable) {
+        if (
+                kwTypes.contains("authorUsername") &&
+                        kwTypes.contains("title") &&
+                        kwTypes.contains("content") &&
+                        kwTypes.contains("tagContent") &&
+                        kwTypes.contains("commentAuthorUsername") &&
+                        kwTypes.contains("commentBody")
+        ) {
+            return articleRepository.findByAuthor_usernameContainingOrTitleContainingOrContentContainingOrTags_contentOrComments_author_usernameContainingOrComments_bodyContaining(kw, kw, kw, kw, kw, kw, pageable);
+        } else if (kwTypes.contains("authorUsername") && kwTypes.contains("title") && kwTypes.contains("content")) {
+            return articleRepository.findByAuthor_usernameContainingOrTitleContainingOrContentContaining(kw, kw, kw, pageable);
+        } else if (kwTypes.contains("title") && kwTypes.contains("content")) {
+            return articleRepository.findByTitleContainingOrContentContaining(kw, kw, pageable);
+        } else if (kwTypes.contains("title")) {
+            return articleRepository.findByTitleContaining(kw, pageable);
+        } else if (kwTypes.contains("content")) {
+            return articleRepository.findByContentContaining(kw, pageable);
+        } else if (kwTypes.contains("authorUsername")) {
+            return articleRepository.findByAuthor_usernameContaining(kw, pageable);
+        }
+
+        return articleRepository.findAll(pageable);
     }
 }

@@ -23,11 +23,13 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder // 상속된 클래스에서 빌더 패턴 사용 가능
 @EntityListeners(AuditingEntityListener.class) // JPA Auditing 기능 사용
 @ToString // toString 메서드 자동 생성
-@EqualsAndHashCode // equals와 hashCode 메서드 자동 생성
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+// @EqualsAndHashCode: equals와 hashCode 메서드 자동 생성
+// onlyExplicitlyIncluded = true: 영속성 컨텍스트에 의해 복제된 객체끼리 동등성 비교 => PK만 비교
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @EqualsAndHashCode.Include
+    @EqualsAndHashCode.Include  // PK만 비교
     private Long id;
 
     @CreatedDate
